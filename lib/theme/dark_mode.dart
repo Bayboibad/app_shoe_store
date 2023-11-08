@@ -20,6 +20,7 @@ ThemeData darkMode = ThemeData(
         elevatedButtonTheme: const ElevatedButtonThemeData(
         style: ButtonStyle(
           backgroundColor: MaterialStatePropertyAll(AppColors.BackgroudApp),
+          
         ),
         
       )

@@ -6,7 +6,7 @@ class MyTextFormField extends StatelessWidget {
   final Icon icons;
   final bool obscureText;
   final Widget iconButton;
-  final String? Function(String?)? validate;
+  final String? Function(String?)? onValidate;
   
 
   const MyTextFormField({
@@ -16,31 +16,19 @@ class MyTextFormField extends StatelessWidget {
     required this.obscureText,
     required this.icons,
     required this.iconButton,
-    required this.validate,
+    required this.onValidate,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(4),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(width: 1, color: Colors.grey)
-      ),
-      child: TextFormField(
+    return  TextFormField(
       controller: controller,
       obscureText: obscureText,
-      validator: validate,
+      validator: onValidate,
       decoration: InputDecoration(
-        border: InputBorder.none,
           icon: icons,
           hintText: hintText,
           suffixIcon: iconButton),
-          
-       
-      // validator: (value) => onValidate,
-    ),
     );
   }
 }

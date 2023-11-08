@@ -1,14 +1,12 @@
-
-import 'package:app_shoe_store/bloc/loading_bloc.dart';
-import 'package:app_shoe_store/bloc/user_bloc.dart';
+import 'package:app_shoe_store/provider/provider_product.dart';
 import 'package:app_shoe_store/firebase_options.dart';
 import 'package:app_shoe_store/provider/suffix_icon_field.dart';
 import 'package:app_shoe_store/provider/them_dark_light.dart';
-import 'package:app_shoe_store/views/login/login_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:app_shoe_store/splash_screen.dart';
+import 'package:app_shoe_store/validate/validate_user.dart';
+import 'package:app_shoe_store/views/login/auth_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -16,7 +14,6 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await FirebaseAuth.instance.useAuthEmulator('localhost', 6666);
   runApp(
     MultiProvider(
         providers: [
@@ -26,17 +23,13 @@ Future<void> main() async {
           ChangeNotifierProvider<SuffixIconProvider>(
             create: (context) => SuffixIconProvider(),
           ),
-          // Các Provider khác nếu cần
+          ChangeNotifierProvider<MyValidate>(create: (context) => MyValidate()),
+          ChangeNotifierProvider<ProviderProductShoe>(create: (context) => ProviderProductShoe() ),
+        
         ],
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (context) => LoadingBloc(),
-            ),
-            BlocProvider(create: (context) => UserAdditionCubit())
-          ],
+       
           child: const MyApp(),
-        )),
+    )
   );
 }
 
@@ -52,7 +45,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: themeProvider.currentTheme,
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: const AuthPage(),
     );
   }
 }

@@ -1,36 +1,44 @@
-import 'package:app_shoe_store/bloc/user_bloc.dart';
 import 'package:app_shoe_store/composents/my_button.dart';
 import 'package:app_shoe_store/composents/my_text_button.dart';
 import 'package:app_shoe_store/composents/my_text_form_field.dart';
 import 'package:app_shoe_store/provider/suffix_icon_field.dart';
+import 'package:app_shoe_store/services/firebase_auth.dart';
+import 'package:app_shoe_store/validate/validate_user.dart';
 import 'package:app_shoe_store/views/login/login_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:app_shoe_store/configs/string.dart';
 
 class SignPage extends StatelessWidget {
-  final userAdditionCubit = UserAdditionCubit();
-
   final emailController = TextEditingController();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
   final rePasswordController = TextEditingController();
   final phoneController = TextEditingController();
+  final validate = MyValidate();
+  final _formKey = GlobalKey<FormState>();
+  void _signUp() {
+    if (_formKey.currentState!.validate()) {
+      // ignore: no_leading_underscores_for_local_identifiers
+      final FirebaseAuthUser _auth = FirebaseAuthUser();
+      _auth.addUserToFirebase(usernameController.text, emailController.text,
+          passwordController.text, phoneController.text);
+    }
+  }
+
   SignPage({super.key});
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => userAdditionCubit,
-      child: Scaffold(
-        appBar: AppBar(title: const Text("Đăng Ký")),
-        // ignore: avoid_unnecessary_containers
-        body: SingleChildScrollView(
+    return Scaffold(
+      appBar: AppBar(title: const Text("Đăng Ký")),
+      // ignore: avoid_unnecessary_containers
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
           child: Container(
             alignment: Alignment.center,
             margin: const EdgeInsets.all(16),
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               // ignore: avoid_unnecessary_containers
               Container(
                 child: Image.asset(
@@ -51,8 +59,9 @@ class SignPage extends StatelessWidget {
                   ),
                 ),
                 obscureText: false,
-                validate: (p0) {
-                  
+                // ignore: body_might_complete_normally_nullable
+                onValidate: (p0) {
+                  return validate.validateName(p0);
                 },
               ),
               const SizedBox(
@@ -70,8 +79,9 @@ class SignPage extends StatelessWidget {
                   ),
                 ),
                 obscureText: false,
-                validate: (p0) {
-                  
+                // ignore: body_might_complete_normally_nullable
+                onValidate: (p0) {
+                  return validate.validateEmail(p0);
                 },
               ),
               const SizedBox(
@@ -89,14 +99,15 @@ class SignPage extends StatelessWidget {
                   ),
                 ),
                 obscureText: false,
-                validate: (p0) {
-
+                // ignore: body_might_complete_normally_nullable
+                onValidate: (p0) {
+                  return validate.validatePhone(p0);
                 },
               ),
               const SizedBox(
                 height: 8,
               ),
-
+        
               Consumer<SuffixIconProvider>(builder: (context, value, child) {
                 return MyTextFormField(
                   controller: passwordController,
@@ -113,8 +124,8 @@ class SignPage extends StatelessWidget {
                     ),
                   ),
                   obscureText: value.isPasswordVisible,
-                  validate: (p0) {
-                    
+                  onValidate: (p0) {
+                    return validate.validatePassword(p0);
                   },
                 );
               }),
@@ -138,8 +149,9 @@ class SignPage extends StatelessWidget {
                       ),
                     ),
                     obscureText: value.isRePasswordVisible,
-                    validate: (p0) {
-                      
+                    onValidate: (p0) {
+                      return validate.validateConfirmPassword(
+                          passwordController.text, p0!);
                     },
                   );
                 },
@@ -147,9 +159,11 @@ class SignPage extends StatelessWidget {
               const SizedBox(
                 height: 32,
               ),
-              MyButton(onTap: () {
-                addUserToFirestore(usernameController.text, emailController.text, passwordController.text, phoneController.text);
-              }, title: Tiltes.sign),
+              MyButton(
+                  onTap: () {
+                    _signUp();
+                  },
+                  title: Tiltes.sign),
               const SizedBox(
                 height: 8,
               ),
@@ -162,7 +176,7 @@ class SignPage extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LoginPage()));
+                                builder: (context) => const LoginPage()));
                       },
                       title: Tiltes.login),
                 ],
@@ -172,10 +186,5 @@ class SignPage extends StatelessWidget {
         ),
       ),
     );
-   
   }
-   void addUserToFirestore(
-        String username, String email, String password, String phone) {
-      userAdditionCubit.addUserToFirestore(username, email, password, phone);
-    }
 }

@@ -1,4 +1,7 @@
 class Tiltes {
+   static const String nameApp = "LogDug";
+
+
   static const String login = "Đăng Nhập";
 
   static const String email = "Email";
