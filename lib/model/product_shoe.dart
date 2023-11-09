@@ -1,4 +1,4 @@
-class Datum {
+class Product {
   String? id;
   String? name;
   String? cart;
@@ -11,7 +11,7 @@ class Datum {
   List<String>? productSizes;
   int? v;
 
-  Datum({
+  Product({
     this.id,
     this.name,
     this.cart,
@@ -25,8 +25,8 @@ class Datum {
     this.v,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) {
-    return Datum(
+  factory Product.fromJson(Map<String, dynamic> json) {
+    return Product(
       id: json['_id'],
       name: json['name'],
       cart: json['cart'],

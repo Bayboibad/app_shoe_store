@@ -11,7 +11,7 @@ class _CartShoeState extends State<CartShoe> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Giỏ hàng")),
+      appBar: AppBar(title: const Text("Giỏ hàng")),
       body: SingleChildScrollView(
         child: Container(
           child: Text("Giỏ hàng"),

@@ -15,7 +15,6 @@ class SignPage extends StatelessWidget {
   final passwordController = TextEditingController();
   final rePasswordController = TextEditingController();
   final phoneController = TextEditingController();
-  final validate = MyValidate();
   final _formKey = GlobalKey<FormState>();
   void _signUp() {
     if (_formKey.currentState!.validate()) {
@@ -29,6 +28,7 @@ class SignPage extends StatelessWidget {
   SignPage({super.key});
   @override
   Widget build(BuildContext context) {
+    var validate = Provider.of<MyValidate>(context);
     return Scaffold(
       appBar: AppBar(title: const Text("Đăng Ký")),
       // ignore: avoid_unnecessary_containers

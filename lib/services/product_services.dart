@@ -12,8 +12,8 @@ class ApiProduct {
 
       // ignore: unnecessary_type_check
       if (jsonData is List) {
-        final List<Datum> shoes = jsonData
-            .map((e) => Datum(
+        final List<Product> shoes = jsonData
+            .map((e) => Product(
                   id: e["_id"],
                   name: e["name"],
                   cart: e["cart"],

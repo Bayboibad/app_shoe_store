@@ -15,7 +15,7 @@ class _PayShoeState extends State<PayShoe> {
         title: Text("Đơn hàng"),
 
       ),
-      body: Text("data"),
+      body: const Text("data"),
     );
   }
 }

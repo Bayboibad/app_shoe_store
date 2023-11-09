@@ -28,17 +28,31 @@ class FirebaseAuthUser {
       print("Failed to add user: $e");
     }
   }
- Future<String> getDataAsJson(String documentId) async {
-  try {
-    DocumentSnapshot documentSnapshot =
-        await FirebaseFirestore.instance.collection('users').doc(documentId).get();
-    Object data = documentSnapshot.data()!;
-    return jsonEncode(data);
-  } catch (e) {
-    // ignore: avoid_print
-    print("Failed to get data: $e");
-    return "";
-  }
-}
 
+  Future<String> getDataAsJson(String documentId) async {
+    try {
+      DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(documentId)
+          .get();
+      Object data = documentSnapshot.data()!;
+      return jsonEncode(data);
+    } catch (e) {
+      // ignore: avoid_print
+      print("Failed to get data: $e");
+      return "";
+    }
+  }
+
+  Future<void> updateUserData(
+      String documentId, Map<String, dynamic> userData) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(documentId)
+          .update(userData);
+    } catch (e) {
+      print("Failed to update user data: $e");
+    }
+  }
 }

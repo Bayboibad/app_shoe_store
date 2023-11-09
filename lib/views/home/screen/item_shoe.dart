@@ -57,7 +57,7 @@ class _ItemShoeState extends State<ItemShoe> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      _silerShow(),
+                      _silerShow(widget.url, widget.avatarFile),
                       Container(
                           padding: const EdgeInsets.all(8),
                           color: themeProvider.currentTheme == lightMode
@@ -258,7 +258,7 @@ class _ItemShoeState extends State<ItemShoe> {
   }
 }
 
-Widget _silerShow() {
+Widget _silerShow(String url , String image) {
   return ImageSlideshow(
     indicatorColor: Colors.blue,
     onPageChanged: (value) {
@@ -268,29 +268,14 @@ Widget _silerShow() {
     isLoop: true,
     children: [
       Image.network(
-        'https://i.pinimg.com/564x/cd/ed/2f/cded2f9c1b38f15718193357b8533182.jpg',
+        '${url}${image}',
         fit: BoxFit.cover,
       ),
-      Image.network(
-        'https://i.pinimg.com/564x/cd/ed/2f/cded2f9c1b38f15718193357b8533182.jpg',
+       Image.network(
+       '${url}${image}',
         fit: BoxFit.cover,
       ),
-      Image.network(
-        'https://i.pinimg.com/564x/cd/ed/2f/cded2f9c1b38f15718193357b8533182.jpg',
-        fit: BoxFit.cover,
-      ),
-      Image.network(
-        'https://i.pinimg.com/564x/cd/ed/2f/cded2f9c1b38f15718193357b8533182.jpg',
-        fit: BoxFit.cover,
-      ),
-      Image.network(
-        'https://i.pinimg.com/564x/cd/ed/2f/cded2f9c1b38f15718193357b8533182.jpg',
-        fit: BoxFit.cover,
-      ),
-      Image.network(
-        'https://i.pinimg.com/564x/cd/ed/2f/cded2f9c1b38f15718193357b8533182.jpg',
-        fit: BoxFit.cover,
-      ),
+    
     ],
   );
 }

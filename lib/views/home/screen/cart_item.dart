@@ -1,4 +1,5 @@
-import 'package:app_shoe_store/model/product_shoe.dart';
+
+import 'package:app_shoe_store/model/category_model.dart';
 import 'package:app_shoe_store/provider/provider_product.dart';
 import 'package:app_shoe_store/provider/them_dark_light.dart';
 import 'package:app_shoe_store/theme/light_mode.dart';
@@ -7,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CartItem extends StatefulWidget {
-  final List<Datum>
+  final List<Category>
       cartItems; // Thêm thuộc tính để truyền danh sách sản phẩm trong giỏ hàng
   const CartItem({Key? key, required this.cartItems}) : super(key: key);
 
@@ -40,7 +41,7 @@ class _CartItemState extends State<CartItem> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>  ListCategoryShoe(
-                          name: widget.cartItems[index].cart.toString(),
+                          name: widget.cartItems[index].name.toString(),
                         )));
               },
               child: Container(
@@ -55,7 +56,7 @@ class _CartItemState extends State<CartItem> {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  widget.cartItems[index].cart.toString(),
+                  widget.cartItems[index].name.toString(),
                   style: TextStyle(
                       fontSize: 16,
                       color: themeProvider.currentTheme == lightMode

@@ -1,5 +1,6 @@
 import 'package:app_shoe_store/composents/my_text_button.dart';
-import 'package:app_shoe_store/configs/colors.dart';
+import 'package:app_shoe_store/model/category_model.dart';
+import 'package:app_shoe_store/provider/provider_category.dart';
 import 'package:app_shoe_store/provider/provider_product.dart';
 import 'package:app_shoe_store/views/home/intro_slider/intro_product.dart';
 import 'package:app_shoe_store/views/home/layout/all_cart.dart';
@@ -7,7 +8,6 @@ import 'package:app_shoe_store/views/home/screen/cart_item.dart';
 import 'package:app_shoe_store/views/home/screen/cart_shoe.dart';
 import 'package:app_shoe_store/views/home/screen/product_item_shoe.dart';
 import 'package:app_shoe_store/views/home/screen/search_shoe.dart';
-import 'package:app_shoe_store/views/loading/loading_dialog.dart';
 import 'package:app_shoe_store/views/loading/screem_load.dart';
 import 'package:flutter/material.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
@@ -28,7 +28,8 @@ class _HomeTabState extends State<HomeTab> {
   void initState() {
     _isLoading = true;
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<ProviderProductShoe>(context, listen: false).getAllShoes();
+      context.read<ProviderProductShoe>().getAllShoes();
+      context.read<CategoryProvider>().getAllCategoryShoes();
     });
     Future.delayed(const Duration(seconds: 2), () {
       setState(() {
@@ -47,6 +48,7 @@ class _HomeTabState extends State<HomeTab> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Logdug Store'),
@@ -68,14 +70,15 @@ class _HomeTabState extends State<HomeTab> {
       ),
       body: LiquidPullToRefresh(
         onRefresh: () async{  },
-        child: Consumer<ProviderProductShoe>(
+        child: Consumer2<ProviderProductShoe,CategoryProvider>(
           builder:
-              (BuildContext context, ProviderProductShoe value, Widget? child) {
+              (BuildContext context, ProviderProductShoe value,CategoryProvider cate, Widget? child) {
             if (_isLoading) {
               return const Center(
                 child: SceenHomeLoad(),
               );
             }
+             
             return SingleChildScrollView(
               child: Container(
                 margin: const EdgeInsets.all(8),
@@ -94,7 +97,7 @@ class _HomeTabState extends State<HomeTab> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  CartAll(cart: value.shoes)));
+                                  CartAll(cart: cate.cat)));
                     }, "Tất cả"),
                     const SizedBox(height: 8),
                     // ignore: avoid_unnecessary_containers
@@ -102,7 +105,7 @@ class _HomeTabState extends State<HomeTab> {
                       child: SizedBox(
                         height: 40,
                         width: screenWidth,
-                        child: CartItem(cartItems: value.shoes),
+                        child: CartItem(cartItems: cate.cat),
                       ),
                     ),
                     const SizedBox(height: 8),

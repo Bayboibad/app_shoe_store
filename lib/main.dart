@@ -1,8 +1,10 @@
+
+
+import 'package:app_shoe_store/provider/provider_category.dart';
 import 'package:app_shoe_store/provider/provider_product.dart';
 import 'package:app_shoe_store/firebase_options.dart';
 import 'package:app_shoe_store/provider/suffix_icon_field.dart';
 import 'package:app_shoe_store/provider/them_dark_light.dart';
-import 'package:app_shoe_store/splash_screen.dart';
 import 'package:app_shoe_store/validate/validate_user.dart';
 import 'package:app_shoe_store/views/login/auth_page.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -14,23 +16,21 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(
-    MultiProvider(
-        providers: [
-          ChangeNotifierProvider<ThemeProvider>(
-            create: (context) => ThemeProvider(),
-          ),
-          ChangeNotifierProvider<SuffixIconProvider>(
-            create: (context) => SuffixIconProvider(),
-          ),
-          ChangeNotifierProvider<MyValidate>(create: (context) => MyValidate()),
-          ChangeNotifierProvider<ProviderProductShoe>(create: (context) => ProviderProductShoe() ),
-        
-        ],
-       
-          child: const MyApp(),
-    )
-  );
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider<ThemeProvider>(
+        create: (context) => ThemeProvider(),
+      ),
+      ChangeNotifierProvider<SuffixIconProvider>(
+        create: (context) => SuffixIconProvider(),
+      ),
+      ChangeNotifierProvider<MyValidate>(create: (context) => MyValidate()),
+      ChangeNotifierProvider<ProviderProductShoe>(
+          create: (context) => ProviderProductShoe()),
+      ChangeNotifierProvider<CategoryProvider>(create: (context) => CategoryProvider())
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

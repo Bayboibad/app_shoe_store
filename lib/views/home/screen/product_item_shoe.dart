@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class ProductItemShoe extends StatefulWidget {
-  List<Datum> products;
+  List<Product> products;
   String url;
   double width;
   double height;

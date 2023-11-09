@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:app_shoe_store/model/product_shoe.dart';
+
+import 'package:app_shoe_store/model/category_model.dart';
 import 'package:app_shoe_store/provider/them_dark_light.dart';
 import 'package:app_shoe_store/theme/light_mode.dart';
 import 'package:app_shoe_store/views/home/screen/list_category_shore.dart';
@@ -8,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CartAll extends StatefulWidget {
-  List<Datum> cart = [];
+  List<Category> cart = [];
   CartAll({super.key, required this.cart});
 
   @override
@@ -41,7 +42,7 @@ class _CartAllState extends State<CartAll> {
           child: GestureDetector(
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=> 
-              ListCategoryShoe(name: widget.cart[index].cart.toString())
+              ListCategoryShoe(name: widget.cart[index].name.toString())
               
               ));
             },
@@ -53,7 +54,7 @@ class _CartAllState extends State<CartAll> {
                     alignment: Alignment.center,
                     height: 50,
                     child: Text(
-                      widget.cart[index].cart.toString(),
+                      widget.cart[index].name.toString(),
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.w500),

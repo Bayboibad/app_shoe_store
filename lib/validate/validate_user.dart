@@ -5,7 +5,7 @@ class MyValidate extends ChangeNotifier {
   RegExp expName = RegExp(r"<[^>]*>");
   RegExp expEmail = RegExp(r"""
 ^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""");
-  RegExp expPhone = RegExp(r"^\d{1,4}-\d{1,4}-\d{1,4}$");
+  RegExp expPhone = RegExp(r"^\d+$");
   final _auth = FirebaseAuth.instance.currentUser;
   String? validateName(String? name) {
     if (name == null || name.isEmpty) {
@@ -13,6 +13,7 @@ class MyValidate extends ChangeNotifier {
     } else if (expName.hasMatch(name)) {
       return 'Vui lòng nhập name hợp lệ';
     }
+    notifyListeners();
     return null;
   }
 

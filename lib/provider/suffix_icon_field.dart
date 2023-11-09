@@ -24,4 +24,11 @@ class SuffixIconProvider with ChangeNotifier {
     _isRePasswordVisible = !_isRePasswordVisible;
     notifyListeners();
   }
+
+  bool _isPasswordVisibleAccount = true;
+  bool get isPasswordVisibleAccount => _isPasswordVisibleAccount;
+  void togglePasswordVisibilityAcount() {
+    _isPasswordVisibleAccount = !_isPasswordVisibleAccount;
+    notifyListeners();
+  }
 }
