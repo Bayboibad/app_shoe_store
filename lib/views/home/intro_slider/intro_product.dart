@@ -34,7 +34,7 @@ class IntroScreenOne extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           image: const DecorationImage(
               image: NetworkImage(
-                  "https://img.pikbest.com/origin/06/30/60/89ppIkbEsTD7K.jpg!w700wp"),
+                  "https://i.pinimg.com/564x/32/b4/e1/32b4e1726924c26ceaba6ae906cfcdd2.jpg"),
               fit: BoxFit.cover, scale: 1.0)),
     );
   }
@@ -52,7 +52,7 @@ class IntroScreenTwe extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               image: const DecorationImage(
                   image: NetworkImage(
-                      "https://i.pinimg.com/736x/8a/f3/d1/8af3d17dc7113ef31f545b3d22befd98.jpg"),
+                      "https://i.pinimg.com/564x/54/ce/ed/54ceeda18a2b91dbebcc54f077566564.jpg"),
                   fit: BoxFit.cover, scale: 1.0)),
         ),
         // ignore: avoid_unnecessary_containers
@@ -76,7 +76,7 @@ class IntroScreenThere extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               image: const DecorationImage(
                   image: NetworkImage(
-                      "https://i.pinimg.com/564x/4b/8a/61/4b8a6190b2243faa85dacce76c025b07.jpg"),
+                      "https://i.pinimg.com/564x/cd/ed/2f/cded2f9c1b38f15718193357b8533182.jpg"),
                   fit: BoxFit.cover,scale: 1.0)),
         ),
          // ignore: avoid_unnecessary_containers

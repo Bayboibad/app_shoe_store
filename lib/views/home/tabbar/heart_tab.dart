@@ -34,7 +34,7 @@ class _HeartTabState extends State<HeartTab> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Yêu Thích"),
+        title: const Text("Yêu Thích"),
         automaticallyImplyLeading: false,
       ),
       body: StreamBuilder<QuerySnapshot>(

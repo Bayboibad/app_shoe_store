@@ -16,7 +16,6 @@ class _NotifyTabState extends State<NotifyTab> {
         title: Text("Thông báo"),
         automaticallyImplyLeading: false,
       ),
-      body: ScreenLoadLove(),
     );
   }
 }

@@ -84,11 +84,11 @@ class _HomeTabState extends State<HomeTab> {
               margin: const EdgeInsets.all(8),
               child: Column(
                 children: [
-                  // SizedBox(
-                  //   height: 180,
-                  //   width: screenWidth,
-                  //   child: const IntroProduct(),
-                  // ),
+                  SizedBox(
+                    height: 180,
+                    width: screenWidth,
+                    child: const IntroProduct(),
+                  ),
                   const SizedBox(
                     height: 8,
                   ),
