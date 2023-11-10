@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 class CartShoe extends StatefulWidget {
@@ -13,6 +15,7 @@ class _CartShoeState extends State<CartShoe> {
     return Scaffold(
       appBar: AppBar(title: const Text("Giỏ hàng")),
       body: SingleChildScrollView(
+        // ignore: avoid_unnecessary_containers
         child: Container(
           child: Text("Giỏ hàng"),
         ),

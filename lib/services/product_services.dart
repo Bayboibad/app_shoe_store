@@ -33,6 +33,7 @@ class ApiProduct {
     }
     return [];
    }catch(e){
+    // ignore: avoid_print
     print("Lỗi mạng");
    }
   }

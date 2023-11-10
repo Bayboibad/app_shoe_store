@@ -1,7 +1,9 @@
 import 'package:app_shoe_store/model/product_shoe.dart';
 import 'package:app_shoe_store/provider/them_dark_light.dart';
+import 'package:app_shoe_store/services/firebase_tym.dart';
 import 'package:app_shoe_store/theme/light_mode.dart';
 import 'package:app_shoe_store/views/home/screen/item_shoe.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -81,12 +83,22 @@ class _ProductItemShoeState extends State<ProductItemShoe> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
+                // ignore: sized_box_for_whitespace
                 Container(
                   width: widget.width,
                   height: 140,
                   child: ImagesImage(
-                      imagesUrl:
-                          "${widget.url}${widget.products[index].avatarFile}"),
+                    id: widget.products[index].id.toString(),
+                    imagesUrl:
+                        "${widget.url}${widget.products[index].avatarFile}",
+                    name: widget.products[index].name.toString(),
+                    cart: widget.products[index].cart.toString(),
+                    brand: widget.products[index].brand.toString(),
+                    priceNew: widget.products[index].priceNew.toString(),
+                    priceOld: widget.products[index].priceOld.toString(),
+                    number: widget.products[index].number.toString(),
+                    description: widget.products[index].description.toString(),
+                  ),
                 ),
                 Container(
                   padding: const EdgeInsets.all(4),
@@ -127,9 +139,28 @@ class _ProductItemShoeState extends State<ProductItemShoe> {
   }
 }
 
+// ignore: must_be_immutable
 class ImagesImage extends StatefulWidget {
   final String imagesUrl;
-  const ImagesImage({super.key, required this.imagesUrl});
+  String id;
+  String name;
+  String cart;
+  String brand;
+  String priceNew;
+  String priceOld;
+  String number;
+  String description;
+  ImagesImage(
+      {super.key,
+      required this.imagesUrl,
+      required this.id,
+      required this.name,
+      required this.cart,
+      required this.brand,
+      required this.priceNew,
+      required this.priceOld,
+      required this.description,
+      required this.number});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -137,10 +168,13 @@ class ImagesImage extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<ImagesImage> {
-  bool isFavorite = false; // Trạng thái yêu thích
+  final _addTym = FirebaseTym();
+  final idUser = FirebaseAuth.instance.currentUser!.uid;
+  late bool isFavorite  = false; // Trạng thái yêu thích
+
   void tym() {
     setState(() {
-      isFavorite = !isFavorite;
+      isFavorite = !isFavorite; // Toggle the value of isFavorite
     });
   }
 
@@ -165,6 +199,35 @@ class _MyWidgetState extends State<ImagesImage> {
           child: GestureDetector(
             onTap: () {
               tym();
+              setState(() {
+                if (isFavorite == true) {
+                  try {
+                    _addTym.addLove(
+                        widget.id,
+                        idUser,
+                        widget.imagesUrl,
+                        widget.name,
+                        widget.cart,
+                        widget.brand,
+                        widget.priceNew,
+                        widget.priceOld,
+                        widget.description);
+                  } catch (e) {
+                    // ignore: avoid_print
+                    print("lỗi");
+                  }
+                } else {
+                  void deleteData(String id) async {
+                    FirebaseTym firebaseTym = FirebaseTym();
+
+                    // Call the delete method
+                    await firebaseTym.deleteLoveData(id);
+
+                    // ignore: avoid_print
+                    print("Love data deleted successfully");
+                  }
+                }
+              });
             },
             child: Icon(
               isFavorite ? Icons.favorite : Icons.favorite_border,
@@ -198,9 +261,10 @@ Widget _sale(double sale) {
         height: 20,
         alignment: Alignment.bottomCenter,
         child: Text(
+          // ignore: unnecessary_brace_in_string_interps
           "Giảm ${sale}%",
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 12, color: Colors.white),
+          style: const TextStyle(fontSize: 12, color: Colors.white),
         ),
       ),
     ],
@@ -222,6 +286,7 @@ Widget _price(String priceNew, String priceOld) {
       Expanded(
         flex: 4,
         child: Text(
+          // ignore: unnecessary_string_interpolations, unnecessary_brace_in_string_interps
           '${priceOld}', // Hiển thị giá cũ với dấu phẩy
           style: const TextStyle(
               decoration: TextDecoration.lineThrough, fontSize: 14),

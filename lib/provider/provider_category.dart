@@ -8,8 +8,13 @@ class CategoryProvider extends ChangeNotifier {
   List<Category> _cat = [];
   List<Category> get cat => _cat;
   getAllCategoryShoes() async {
-    final res = await sevice.fetchDataCarygo();
+    try{
+      final res = await sevice.fetchDataCarygo();
     _cat = res;
     notifyListeners();
+    }catch(e){
+      // ignore: unnecessary_brace_in_string_interps, avoid_print
+      print("looiex ${e}");
+    }
   }
 }

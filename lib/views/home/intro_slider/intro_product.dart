@@ -35,7 +35,7 @@ class IntroScreenOne extends StatelessWidget {
           image: const DecorationImage(
               image: NetworkImage(
                   "https://img.pikbest.com/origin/06/30/60/89ppIkbEsTD7K.jpg!w700wp"),
-              fit: BoxFit.cover)),
+              fit: BoxFit.cover, scale: 1.0)),
     );
   }
 }
@@ -53,16 +53,12 @@ class IntroScreenTwe extends StatelessWidget {
               image: const DecorationImage(
                   image: NetworkImage(
                       "https://i.pinimg.com/736x/8a/f3/d1/8af3d17dc7113ef31f545b3d22befd98.jpg"),
-                  fit: BoxFit.cover)),
+                  fit: BoxFit.cover, scale: 1.0)),
         ),
         // ignore: avoid_unnecessary_containers
         Container(
           child: Image.asset("./assets/images/sale.png",width: 100,height: 100,),
         ),
-        // Container(
-        //   alignment: Alignment.bottomRight,
-        //   child: Text("data", style: TextStyle(fontSize: 20, color: Colors.red),),
-        // )
       ],
     );
   }
@@ -81,7 +77,7 @@ class IntroScreenThere extends StatelessWidget {
               image: const DecorationImage(
                   image: NetworkImage(
                       "https://i.pinimg.com/564x/4b/8a/61/4b8a6190b2243faa85dacce76c025b07.jpg"),
-                  fit: BoxFit.cover)),
+                  fit: BoxFit.cover,scale: 1.0)),
         ),
          // ignore: avoid_unnecessary_containers
          Container(

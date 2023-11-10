@@ -8,7 +8,8 @@ class ApiCategory {
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
-        final List<dynamic> jsonCat = jsonDecode(response.body)["data"] as List;
+        final jsonCat = jsonDecode(response.body)["data"];
+
 
   // ignore: unnecessary_type_check
   if (jsonCat is List) {
@@ -23,6 +24,7 @@ class ApiCategory {
       }
       return [];
     } catch (e) {
+      // ignore: avoid_print
       print("Network error");
     }
   }

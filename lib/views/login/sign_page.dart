@@ -9,23 +9,49 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:app_shoe_store/configs/string.dart';
 
-class SignPage extends StatelessWidget {
+class SignPage extends StatefulWidget {
+  const SignPage({super.key});
+
+  @override
+  State<SignPage> createState() => _SignPageState();
+}
+
+class _SignPageState extends State<SignPage> {
+
+
   final emailController = TextEditingController();
+
   final usernameController = TextEditingController();
+
   final passwordController = TextEditingController();
+
   final rePasswordController = TextEditingController();
+
   final phoneController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
+
   void _signUp() {
     if (_formKey.currentState!.validate()) {
       // ignore: no_leading_underscores_for_local_identifiers
-      final FirebaseAuthUser _auth = FirebaseAuthUser();
-      _auth.addUserToFirebase(usernameController.text, emailController.text,
-          passwordController.text, phoneController.text);
+      try {
+        // ignore: no_leading_underscores_for_local_identifiers
+        final FirebaseAuthUser _auth = FirebaseAuthUser();
+        _auth.addUserToFirebase(usernameController.text, emailController.text,
+            passwordController.text, phoneController.text);
+
+        emailController.clear();
+        passwordController.clear();
+        usernameController.clear();
+        rePasswordController.clear();
+        phoneController.clear();
+      } catch (e) {
+        // ignore: avoid_print
+        print("lỗi");
+      }
     }
   }
 
-  SignPage({super.key});
   @override
   Widget build(BuildContext context) {
     var validate = Provider.of<MyValidate>(context);
@@ -38,7 +64,8 @@ class SignPage extends StatelessWidget {
           child: Container(
             alignment: Alignment.center,
             margin: const EdgeInsets.all(16),
-            child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               // ignore: avoid_unnecessary_containers
               Container(
                 child: Image.asset(
@@ -107,7 +134,7 @@ class SignPage extends StatelessWidget {
               const SizedBox(
                 height: 8,
               ),
-        
+
               Consumer<SuffixIconProvider>(builder: (context, value, child) {
                 return MyTextFormField(
                   controller: passwordController,

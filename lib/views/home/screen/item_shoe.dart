@@ -178,6 +178,7 @@ class _ItemShoeState extends State<ItemShoe> {
                             ),
                             // ignore: unnecessary_string_interpolations
                             Text(
+                              // ignore: unnecessary_string_interpolations
                               "${widget.description}",
                               textAlign: TextAlign.left,
                             )
@@ -268,10 +269,12 @@ Widget _silerShow(String url , String image) {
     isLoop: true,
     children: [
       Image.network(
+        // ignore: unnecessary_brace_in_string_interps
         '${url}${image}',
         fit: BoxFit.cover,
       ),
        Image.network(
+       // ignore: unnecessary_brace_in_string_interps
        '${url}${image}',
         fit: BoxFit.cover,
       ),

@@ -50,6 +50,7 @@ class _AccountTabState extends State<AccountTab> {
           address = userData['address'];
         });
       } else {
+        // ignore: avoid_print
         print("User data not found or an error occurred.");
       }
     });
@@ -62,6 +63,7 @@ class _AccountTabState extends State<AccountTab> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(Tiltes.Acount),
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
             icon: Icon(
@@ -81,24 +83,27 @@ class _AccountTabState extends State<AccountTab> {
           children: [
             Expanded(
                 flex: 3,
-                child: Column(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.all(4),
-                      child: const Icon(
-                        Icons.account_circle,
-                        size: 90,
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.all(4),
+                        child: const Icon(
+                          Icons.account_circle,
+                          size: 90,
+                        ),
                       ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.all(4),
-                      child: Text(
-                        username,
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w500),
-                      ),
-                    )
-                  ],
+                      Container(
+                        margin: const EdgeInsets.all(4),
+                        child: Text(
+                          username,
+                          style: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w500),
+                        ),
+                      )
+                    ],
+                  ),
                 )),
             Expanded(
                 flex: 6,
@@ -168,7 +173,7 @@ class _AccountTabState extends State<AccountTab> {
                 flex: 1,
                 // ignore: sized_box_for_whitespace
                 child: Container(
-                  height: 40,
+                  margin: const EdgeInsets.only(top: 16),
                   child: MyButton(
                       onTap: () {
                         _signOut();
@@ -183,6 +188,7 @@ class _AccountTabState extends State<AccountTab> {
 }
 
 Widget _ItemLayout(Function() onTap, String title) {
+  // ignore: sized_box_for_whitespace
   return Container(
     height: 50,
     child: Row(

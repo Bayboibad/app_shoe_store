@@ -1,4 +1,4 @@
-import 'package:app_shoe_store/views/login/login_page.dart';
+import 'package:app_shoe_store/views/login/auth_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashSreen extends StatefulWidget {
@@ -12,14 +12,14 @@ class _SplashSreenState extends State<SplashSreen> {
    @override
   void initState() {
     Future.delayed(const Duration(seconds: 3),(){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> const LoginPage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> const AuthPage()));
     });
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey.shade300,
+      color: Colors.white,
       child: Center(
         
         child: Image.asset(

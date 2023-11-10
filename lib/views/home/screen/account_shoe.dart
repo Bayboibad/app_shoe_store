@@ -47,8 +47,9 @@ class _ProfileShoeState extends State<ProfileShoe> {
         };
         String documentId = FirebaseAuth.instance.currentUser!.uid;
 
-        await FirebaseAuthUser().updateUserData(documentId, updatedData);
+        await FirebaseAuthUser().updateUserData(documentId, updatedData,email,pass);
       } catch (e) {
+        // ignore: avoid_print
         print("Lỗi");
       }
     }
@@ -71,7 +72,7 @@ class _ProfileShoeState extends State<ProfileShoe> {
         child: Form(
           key: _formKey,
           child: Container(
-            margin: EdgeInsets.all(16),
+            margin: const EdgeInsets.all(16),
             child: Column(children: [
               Container(
                 margin: const EdgeInsets.all(8),
@@ -90,7 +91,7 @@ class _ProfileShoeState extends State<ProfileShoe> {
                     enabled: enbale,
                     hintText: widget.username.toString(),
                     obscureText: false,
-                    icons: Icon(Icons.account_circle_rounded),
+                    icons: const Icon(Icons.account_circle_rounded),
                     iconButton: IconButton(
                       onPressed: () {},
                       icon: const Icon(
@@ -110,7 +111,7 @@ class _ProfileShoeState extends State<ProfileShoe> {
                     enabled: enbale,
                     hintText: widget.email.toString(),
                     obscureText: false,
-                    icons: Icon(Icons.email),
+                    icons: const Icon(Icons.email),
                     iconButton: IconButton(
                       onPressed: () {},
                       icon: const Icon(
@@ -173,7 +174,7 @@ class _ProfileShoeState extends State<ProfileShoe> {
                     enabled: enbale,
                     hintText: widget.address.toString(),
                     obscureText: false,
-                    icons: Icon(Icons.location_on),
+                    icons: const Icon(Icons.location_on),
                     iconButton: IconButton(
                       onPressed: () {},
                       icon: const Icon(
@@ -181,7 +182,9 @@ class _ProfileShoeState extends State<ProfileShoe> {
                         color: Colors.transparent,
                       ),
                     ),
+                    // ignore: body_might_complete_normally_nullable
                     onValidate: (p0) {
+                      // ignore: unrelated_type_equality_checks
                       if (p0!.length == "") {
                         return "Vui lòng nhập địa chỉ";
                       }
@@ -240,7 +243,7 @@ void showCustomDialog(BuildContext context, String text) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Thông báo'),
+        title: const Text('Thông báo'),
         content:  Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -252,7 +255,7 @@ void showCustomDialog(BuildContext context, String text) {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text('Close',style: TextStyle(color: AppColors.BackgroudApp)),
+            child: const Text('Close',style: TextStyle(color: AppColors.BackgroudApp)),
           ),
         ],
       );
